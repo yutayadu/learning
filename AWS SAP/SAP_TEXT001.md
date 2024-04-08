@@ -37,4 +37,50 @@
     - サブネット自体でインバウンドとアウトバウンド両方の拒否ポリシーを設定できます。
     - https://qiita.com/hasmukhrathod_nttdintellilink/items/fa552a0446bbfb277d45
 
+## 0103
+- ヒューリスティック
+    - 必ず正しい答えが導けるわけではないが、ある程度のレベルで正解に近い解を得ることができる方法
+- Amazon Kinesis (Data Streams)
+    - デフォルトの保存期間はで24時間。
+
+## 0104
+- IAM
+    - https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html
+
+## 0105
+- 一括請求
+    - AWS Organizationの一括請求
+    - https://docs.aws.amazon.com/ja_jp/awsaccountbilling/latest/aboutv2/consolidated-billing.html
+- クロスアカウントアクセス
+    - アカウントA (123423453456) に加えてアカウントB (654354324321) のリソースを管理すると管理すべきログイン情報が増える。
+    - クロスアカウントアクセスの出番です! クロスアカウントアクセスを使うと、「アカウントAのプリンシパル」から「アカウントBのリソース」を操作できる
+
+## 0106
+- IDフェデレーション
+    - 「ユーザー認証」と「リソースアクセス承認のために必要な情報伝達」を目的とした2者間の信頼連携システム.
+    - それぞれ独自のID管理システムを持つ複数のセキュリティドメイン間で、それぞれのユーザーIDをリンクさせる
+- AD Connector
+    - AWS管理コンソールのユーザとパスワードをオンプレのADと連携する
+    - 既存のオンプレミス Microsoft Active Directory を使用して、AWS のアプリケーションやサービスにアクセス情報をキャッシュせずにオンプレミスの Microsoft Active Directory へリダイレクトするのに使用するディレクトリゲートウェイ
+
+## 0107
+- 数万ユーザ利用の写真共有サービス（モバイル）
+    - S3バケット内のすべてのユーザオブジェクトにユーザIDで設定されるキーベースの命名方式を採用
+    - アプリケーションレベルでユーザを認証し、AWS Security Token Service(STS)を使用して、S3オブジェクトにトークンベースの認証を付与
+
+## 0301
+- Amazon Elastic MapReduce(EMR)
+    - ログデータをS3に収集し、Amazon Elastic MapReduce(EMR)ジョブに処理し、Amazon Redshiftデータウェアハウス用のCSVおよび日別レポートを生成する。
+    - Amazon EMR (旧称 Amazon Elastic MapReduce) は、AWS でビッグデータフレームワーク (Apache Hadoop や Apache Spark など) の実行を簡素化して、ビッグデータを処理および分析するマネージドクラスタープラットフォーム
+    - マスターはリザーブやオンデマンド、ジョブはスポットなどが費用対効果が高い
+- S3 1ゾーン -IA
+    - Amazon S3 One Zone-Infrequent Access (S3 One Zone-IA)
+    - アクセス頻度は低いが、必要に応じてすぐに取り出すことが必要なデータに適している
+    - データ損失の影響を受けやすい可能性
+- アプリケーション向けのインスタンスの構成シナリオ
+    - データウェアハウス：マスターノードはオンデマンド。コアノードはオンデマンド/インスタンスフリートの組合せ。タスクノードはスポット/インスタンスフリートの組合せ
+- インスタンスフリート
+    - 10台サーバが必要な際は2割オンデマンド・8割スポットとかの設定
+- S3ストレージクラスについて
+    - https://aws.amazon.com/jp/s3/storage-classes/
 
