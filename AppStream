@@ -30,3 +30,45 @@ Step 3: AppStream 2.0やWorkSpacesの設定
 			認証オプションで証明書ベースの認証を有効にし、連携するCA（AWS Private CA）を選択します。
 
 これらの情報や設定項目がそろえば、手順通りに進めることが可能です。
+
+---
+以下に全工程で必要なステップを、コピペ可能な形式でまとめます。
+
+AWS Private CA Connector for Active Directoryを使った証明書ベースの認証設定手順
+
+Step 1: AWS Private CA Connectorのセットアップ
+
+	1.	AWSアカウントにログイン
+	•	AWSの管理コンソールにログインし、証明書を管理する「AWS Certificate Manager (ACM)」にアクセスします。
+	2.	S3バケットの作成
+	•	S3サービスに移動し、「Create bucket（バケットの作成）」をクリック。
+	•	一意のバケット名を指定し（例: private-ca-logs-<your-unique-identifier>）、リージョンを選択。
+	•	バケットポリシーやIAMポリシーで、AWS Private CAがこのバケットに書き込みできるようにアクセス権を設定します。
+	3.	AWS Private CAの設定
+	•	ACMの「Private CA」セクションで「Create a private CA」をクリック。
+	•	CAタイプを「Root CA」または「Subordinate CA」から選択。
+	•	CAの詳細情報（組織名、部門名、国コードなど）を入力。
+	•	キーアルゴリズムや署名アルゴリズム（例: RSA 2048-bit）を選択し、CAを作成します。
+	4.	AWS Private CA Connectorのインストールと設定
+	•	AWS Private CAの設定画面でAD Connectorのオプションを探し、有効化します。
+	•	Directory IDを指定し、ConnectorをAWS Managed Microsoft ADやオンプレミスADと関連付けます。
+
+Step 2: Active Directory内の証明書発行
+
+	1.	Active Directoryのセットアップ
+	•	AWS Managed Microsoft ADやオンプレミスADにアクセスし、証明書を発行する準備をします。
+	2.	証明書テンプレートの設定
+	•	ADで証明書テンプレートを作成し、利用範囲や有効期限などを設定します。
+	3.	証明書の発行
+	•	AD内のユーザーやデバイスごとに、設定したテンプレートに基づき証明書を発行します。
+
+Step 3: AppStream 2.0やWorkSpacesの設定
+
+	1.	AppStream 2.0またはWorkSpacesの管理画面にアクセス
+	•	設定画面で、証明書ベースの認証オプションを選択します。
+	2.	認証オプションの有効化
+	•	証明書ベースの認証を有効にし、連携するCA（AWS Private CA）を指定します。
+	3.	テスト
+	•	AppStream 2.0またはWorkSpacesにログインし、証明書を使った認証が正常に動作するか確認します。
+
+これで全ての手順が完了し、証明書ベースの認証が設定されます。
